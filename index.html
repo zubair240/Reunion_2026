@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full bg-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেজিস্ট্রেশন ফর্ম - শতবর্ষ পূর্তি উদযাপন-২০২৭ | রাঙ্গুনীয়া মজুমদারখীল উচ্চ বিদ্যালয়</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Bengali & Latin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Serif+Bengali:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Serif Bengali"', 'Kalpurush', '"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        school: {
+                            green: '#046A38', // Traditional Bangladesh / School Green
+                            greenDark: '#024b27',
+                            red: '#DA291C',   // Red accent
+                            gold: '#D4AF37',
+                            cream: '#FFFDF5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif Bengali', 'Kalpurush', sans-serif;
+        }
+        
+        /* Print Styles for Digital Receipt */
+        @media print {
+            body * {
+                visibility: hidden !important;
+            }
+            #printableReceiptArea, #printableReceiptArea * {
+                visibility: visible !important;
+            }
+            #printableReceiptArea {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                background: white !important;
+                color: black !important;
+                padding: 10px !important;
+                margin: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col pb-12">
+
+    <!-- Top Decorative Border -->
+    <div class="h-3 bg-gradient-to-r from-school-green via-school-red to-school-green"></div>
+
+    <main class="max-w-4xl mx-auto w-full px-3 sm:px-6 mt-4 sm:mt-8 flex-grow">
+        
+        <!-- Main Form Container -->
+        <div id="formCard" class="bg-white rounded-3xl shadow-xl border-2 border-school-green/20 overflow-hidden">
+            
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-b from-emerald-950 via-school-greenDark to-school-green text-white p-6 sm:p-8 text-center relative border-b-4 border-school-gold">
+                
+                <!-- School Crest / Logo -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full p-1 shadow-md flex items-center justify-center border-2 border-school-gold">
+                            <i class="fa-solid fa-graduation-cap text-3xl sm:text-4xl text-school-green"></i>
+                        </div>
+                        <div class="text-left hidden sm:block">
+                            <span class="text-xs text-emerald-200 block">স্থাপিত: ১৯২৭ খ্রিঃ</span>
+                            <span class="text-xs font-semibold text-school-gold">রাঙ্গুনীয়া, চট্টগ্রাম</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center sm:text-center">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-wide leading-tight">
+                            রাঙ্গুনীয়া মজুমদারখীল উচ্চ বিদ্যালয়
+                        </h1>
+                        <p class="text-xs sm:text-sm text-emerald-100 mt-1 font-medium">
+                            রাঙ্গুনীয়া, চট্টগ্রাম । স্থাপিত: ১৯২৭
+                        </p>
+                    </div>
+
+                    <!-- 100 Years Badge -->
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-school-red text-white rounded-full flex flex-col items-center justify-center border-2 border-school-gold shadow-lg transform rotate-3">
+                        <span class="text-lg sm:text-2xl font-black leading-none">100</span>
+                        <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mt-0.5">বছর পূর্তি</span>
+                    </div>
+                </div>
+
+                <!-- Banner Title Badge -->
+                <div class="inline-block bg-school-red text-white font-extrabold px-6 py-2 rounded-full text-lg sm:text-2xl border-2 border-white shadow-md my-2">
+                    শতবর্ষ পূর্তি উদযাপন-২০২৭
+                </div>
+                <div class="text-sm sm:text-base font-bold text-amber-300 mt-1">
+                    রেজিস্ট্রেশন ফর্ম
+                </div>
+
+                <p class="text-xs sm:text-sm italic text-emerald-100 mt-3 border-t border-emerald-600/60 pt-2 max-w-lg mx-auto">
+                    "শতবর্ষে গৌরবময় অতীত, আগামীর পথে অগ্রযাত্রা"
+                </p>
+            </div>
+
+            <form id="reunionForm" onsubmit="handleFormSubmission(event)" class="p-4 sm:p-8 space-y-8">
+                
+                <!-- SECTION 1: প্রাক্তনী শিক্ষার্থীর ব্যক্তিগত তথ্য -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b-2 border-school-green/30 pb-2">
+                        <span class="bg-school-green text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-base">১</span>
+                        <h2 class="text-lg sm:text-xl font-bold text-school-green">প্রাক্তনী শিক্ষার্থীর ব্যক্তিগত তথ্য</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Bangla Name -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ১. নাম (বাংলায়) <span class="text-school-red">*</span>
+                            </label>
+                            <input type="text" id="nameBn" required placeholder="উদা: ড. মোহাম্মদ রফিকুল ইসলাম" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- English Name -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                2. Name In English (Block Letter) <span class="text-school-red">*</span>
+                            </label>
+                            <input type="text" id="nameEn" required placeholder="e.g. DR. MOHAMMAD RAFIQUL ISLAM" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm uppercase text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- Father's Name -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৩. পিতার নাম <span class="text-school-red">*</span>
+                            </label>
+                            <input type="text" id="fatherName" required placeholder="পিতার নাম লিখুন" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- Mother's Name -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৪. মাতার নাম <span class="text-school-red">*</span>
+                            </label>
+                            <input type="text" id="motherName" required placeholder="মাতার নাম লিখুন" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- SSC Passing Year -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৫. এসএসসি পাসের সন <span class="text-school-red">*</span>
+                            </label>
+                            <select id="sscYear" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                                <option value="">পাসের সন নির্বাচন করুন</option>
+                                <!-- Generated by JS -->
+                            </select>
+                        </div>
+
+                        <!-- Group / Department -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৬. শাখা / বিভাগ <span class="text-school-red">*</span>
+                            </label>
+                            <div class="flex items-center gap-4 py-2">
+                                <label class="inline-flex items-center gap-1.5 cursor-pointer text-sm font-medium">
+                                    <input type="radio" name="deptGroup" value="বিজ্ঞান" checked class="w-4 h-4 text-school-green focus:ring-school-green"> বিজ্ঞান
+                                </label>
+                                <label class="inline-flex items-center gap-1.5 cursor-pointer text-sm font-medium">
+                                    <input type="radio" name="deptGroup" value="মানবিক" class="w-4 h-4 text-school-green focus:ring-school-green"> মানবিক
+                                </label>
+                                <label class="inline-flex items-center gap-1.5 cursor-pointer text-sm font-medium">
+                                    <input type="radio" name="deptGroup" value="ব্যবসায় শিক্ষা" class="w-4 h-4 text-school-green focus:ring-school-green"> ব্যবসায় শিক্ষা
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Current Profession & Designation -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৭. বর্তমান পেশা ও পদবী
+                            </label>
+                            <input type="text" id="profession" placeholder="উদা: শিক্ষক, ব্যবসায়ী, প্রকৌশলী ইত্যাদি" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- Work Organization Name & Address -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৮. পেশাগত প্রতিষ্ঠানের নাম ও ঠিকানা
+                            </label>
+                            <input type="text" id="workplace" placeholder="প্রতিষ্ঠানের নাম ও কর্মস্থল" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <!-- Photo Upload Field with Preview -->
+                        <div class="sm:col-span-2 bg-slate-50 p-4 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                    প্রাক্তনের পাসপোর্ট সাইজ ছবি আপলোড <span class="text-school-red">*</span>
+                                </label>
+                                <p class="text-xs text-slate-500">পরিষ্কার ছবি যুক্ত করুন (Max: 5MB)</p>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div id="photoPreviewContainer" class="w-16 h-20 bg-slate-200 rounded-lg border border-slate-300 flex items-center justify-center overflow-hidden">
+                                    <i class="fa-regular fa-image text-slate-400 text-2xl" id="photoPlaceholderIcon"></i>
+                                    <img id="photoPreviewImg" class="w-full h-full object-cover hidden" alt="Photo Preview">
+                                </div>
+                                <label class="cursor-pointer px-4 py-2 bg-school-green hover:bg-school-greenDark text-white text-xs font-bold rounded-xl transition shadow">
+                                    <i class="fa-solid fa-cloud-arrow-up mr-1"></i> ছবি বাছুন
+                                    <input type="file" id="applicantPhoto" accept="image/*" required onchange="handlePhotoPreview(event)" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: যোগাযোগের ঠিকানা -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b-2 border-school-green/30 pb-2">
+                        <span class="bg-school-green text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-base">২</span>
+                        <h2 class="text-lg sm:text-xl font-bold text-school-green">যোগাযোগের ঠিকানা</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ৯. বর্তমান ঠিকানা <span class="text-school-red">*</span>
+                            </label>
+                            <textarea id="presentAddress" required rows="2" placeholder="গ্রাম/বাসা, ডাকঘর, উপজেলা, জেলা" 
+                                class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ১০. স্থায়ী ঠিকানা <span class="text-school-red">*</span>
+                            </label>
+                            <textarea id="permanentAddress" required rows="2" placeholder="গ্রাম, ডাকঘর, উপজেলা, জেলা" 
+                                class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ১১. মোবাইল নম্বর <span class="text-school-red">*</span>
+                            </label>
+                            <input type="tel" id="mobileNumber" required placeholder="017XXXXXXXX" pattern="[0-9]{11}" title="১১ ডিজিটের সঠিক নম্বর লিখুন"
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ১২. ই-মেইল আইডি (যদি থাকে)
+                            </label>
+                            <input type="email" id="emailAddress" placeholder="example@email.com" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: অনুষ্ঠানে অংশগ্রহণ ও টি-শার্ট -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b-2 border-school-green/30 pb-2">
+                        <span class="bg-school-green text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-base">৩</span>
+                        <h2 class="text-lg sm:text-xl font-bold text-school-green">অনুষ্ঠানে অংশগ্রহণ ও টি-শার্ট সাইজ</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Single or Family Toggle -->
+                        <div class="bg-amber-50/60 p-4 border border-amber-200 rounded-2xl">
+                            <label class="block text-xs font-bold text-slate-800 uppercase mb-2">
+                                ১৩. আপনি কি একাকী অংশ নেবেন? <span class="text-school-red">*</span>
+                            </label>
+                            <div class="flex items-center gap-6">
+                                <label class="inline-flex items-center gap-2 cursor-pointer font-bold text-slate-700">
+                                    <input type="radio" name="soloAttendance" value="yes" checked onchange="handleGuestToggle()" class="w-4 h-4 text-school-green focus:ring-school-green"> হ্যাঁ (একাকী)
+                                </label>
+                                <label class="inline-flex items-center gap-2 cursor-pointer font-bold text-slate-700">
+                                    <input type="radio" name="soloAttendance" value="no" onchange="handleGuestToggle()" class="w-4 h-4 text-school-green focus:ring-school-green"> না (অতিথি সাথে থাকবে)
+                                </label>
+                            </div>
+
+                            <!-- Guest Count Field (Conditional) -->
+                            <div id="guestCountBox" class="mt-3 hidden pt-3 border-t border-amber-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">
+                                    অতিথির সংখ্যা (জনপ্রতি ৳৫০০ ফি প্রযোজ্য):
+                                </label>
+                                <input type="number" id="guestCount" min="1" max="10" value="1" onchange="updateFeeCalculations()" oninput="updateFeeCalculations()"
+                                    class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold text-slate-800 focus:ring-2 focus:ring-school-green outline-none">
+                            </div>
+                        </div>
+
+                        <!-- T-Shirt Size Selection -->
+                        <div class="bg-slate-50 p-4 border border-slate-200 rounded-2xl">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">
+                                টি-শার্ট সাইজ (T-Shirt Size - নিজের জন্য) <span class="text-school-red">*</span>
+                            </label>
+                            <div class="grid grid-cols-6 gap-1.5">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="S" class="peer hidden">
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">S</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="M" class="peer hidden" checked>
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">M</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="L" class="peer hidden">
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">L</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="XL" class="peer hidden">
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">XL</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="XXL" class="peer hidden">
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">XXL</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="tshirtSize" value="XXXL" class="peer hidden">
+                                    <div class="py-2 text-center bg-white border border-slate-300 rounded-lg text-xs font-bold peer-checked:border-school-green peer-checked:bg-school-green peer-checked:text-white transition">3XL</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: পেমেন্ট ও ফি প্রদান -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b-2 border-school-green/30 pb-2">
+                        <span class="bg-school-green text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold text-base">৪</span>
+                        <h2 class="text-lg sm:text-xl font-bold text-school-green">ফি প্রদান ও ব্যাংকিং বিবরণ</h2>
+                    </div>
+
+                    <!-- Payment Notice Box -->
+                    <div class="bg-emerald-50 border-2 border-emerald-500/40 rounded-2xl p-4 text-xs sm:text-sm text-slate-800 space-y-2">
+                        <div class="font-bold text-school-green flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-circle-info text-base"></i> ফি সংক্রান্ত নিয়মাবলী ও একাউন্ট নম্বর:
+                        </div>
+                        <ul class="list-disc list-inside space-y-1 font-medium text-slate-700">
+                            <li>প্রাক্তন শিক্ষার্থীর রেজিস্ট্রেশন ফি: <span class="font-extrabold text-slate-900">৳ ১০০০ টাকা</span> (বিকাশ/নগদে দিলে ১০২০ টাকা)</li>
+                            <li>প্রতি অতিথির ফি: <span class="font-extrabold text-slate-900">৳ ৫০০ টাকা</span> (বিকাশ/নগদে দিলে ৫১০ টাকা)</li>
+                        </ul>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-emerald-200">
+                            <div class="bg-white p-2.5 rounded-xl border border-emerald-200">
+                                <span class="font-bold text-pink-600 block">বিকাশ / নগদ (পার্সোনাল):</span>
+                                <span class="font-mono text-sm font-extrabold text-slate-800">01860-537799</span>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-emerald-200">
+                                <span class="font-bold text-emerald-800 block">ব্যাংক একাউন্ট বিবরণী:</span>
+                                <span class="block font-semibold">Shotobarsho Udjapon Parishad</span>
+                                <span class="font-mono text-xs font-bold text-slate-800 block">A/C: 0200026552199</span>
+                                <span class="text-[11px] text-slate-500">অগ্রণী ব্যাংক পিএলসি, শান্তিনিকেতন শাখা, রাঙ্গুনীয়া</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Selector -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">
+                            ফি প্রদানের মাধ্যম নির্বাচন করুন <span class="text-school-red">*</span>
+                        </label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="bkash" checked onchange="updateFeeCalculations()" class="peer hidden">
+                                <div class="py-3 px-2 text-center bg-slate-50 border-2 border-slate-200 rounded-xl peer-checked:border-pink-500 peer-checked:bg-pink-50 transition">
+                                    <i class="fa-solid fa-mobile-screen-button block text-lg text-pink-600 mb-1"></i>
+                                    <span class="text-xs font-bold block text-slate-800">বিকাশ</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="nagad" onchange="updateFeeCalculations()" class="peer hidden">
+                                <div class="py-3 px-2 text-center bg-slate-50 border-2 border-slate-200 rounded-xl peer-checked:border-orange-500 peer-checked:bg-orange-50 transition">
+                                    <i class="fa-solid fa-wallet block text-lg text-orange-600 mb-1"></i>
+                                    <span class="text-xs font-bold block text-slate-800">নগদ</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="paymentMethod" value="bank" onchange="updateFeeCalculations()" class="peer hidden">
+                                <div class="py-3 px-2 text-center bg-slate-50 border-2 border-slate-200 rounded-xl peer-checked:border-emerald-600 peer-checked:bg-emerald-50 transition">
+                                    <i class="fa-solid fa-building-columns block text-lg text-emerald-700 mb-1"></i>
+                                    <span class="text-xs font-bold block text-slate-800">ব্যাংক জমার রসিদ</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Fee Summary Card -->
+                    <div class="bg-gradient-to-r from-slate-900 to-school-greenDark text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs text-amber-300 font-bold uppercase block">স্বয়ংক্রিয় ফি হিসাব (Total Breakdown)</span>
+                            <div class="text-xs text-slate-200 mt-1 space-y-0.5">
+                                <div>প্রাক্তন ছাত্র ফি: <span id="feeBreakdownMain">১০২০ টাকা</span></div>
+                                <div id="feeBreakdownGuestRow" class="hidden">অতিথি ফি (<span id="feeGuestCountText">0</span> জন): <span id="feeBreakdownGuest">০ টাকা</span></div>
+                            </div>
+                        </div>
+                        <div class="text-center sm:text-right">
+                            <span class="text-xs text-slate-300 block">সর্বমোট প্রদেয় ফি</span>
+                            <span id="calculatedTotalAmount" class="text-2xl sm:text-3xl font-black text-amber-400">৳ ১০২০</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details Inputs -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                মোট প্রদত্ত ফি (টাকায়) <span class="text-school-red">*</span>
+                            </label>
+                            <input type="number" id="paidAmountInput" required readonly 
+                                class="w-full px-3.5 py-2.5 bg-slate-200 font-extrabold text-slate-900 border border-slate-300 rounded-xl text-sm outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                ট্রানজেকশন আইডি (Txn ID / Ref No.) <span class="text-school-red">*</span>
+                            </label>
+                            <input type="text" id="transactionId" required placeholder="উদা: 9J82KSLLX" 
+                                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:ring-2 focus:ring-school-green focus:border-school-green outline-none transition uppercase">
+                        </div>
+
+                        <!-- Receipt Screenshot Upload -->
+                        <div class="sm:col-span-2 bg-slate-50 p-4 border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                    পেমেন্টের রসিদ / বিকাশ-নগদ স্ক্রিনশট আপলোড <span class="text-school-red">*</span>
+                                </label>
+                                <p class="text-xs text-slate-500">টাকা পাঠানোর প্রমাণ হিসেবে রসিদ বা স্ক্রিনশট দিন</p>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div id="receiptPreviewContainer" class="w-16 h-16 bg-slate-200 rounded-lg border border-slate-300 flex items-center justify-center overflow-hidden">
+                                    <i class="fa-solid fa-receipt text-slate-400 text-2xl" id="receiptPlaceholderIcon"></i>
+                                    <img id="receiptPreviewImg" class="w-full h-full object-cover hidden" alt="Receipt Preview">
+                                </div>
+                                <label class="cursor-pointer px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition shadow">
+                                    <i class="fa-solid fa-file-arrow-up mr-1"></i> রসিদ সংযুক্ত করুন
+                                    <input type="file" id="paymentReceipt" accept="image/*" required onchange="handleReceiptPreview(event)" class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: অঙ্গীকারনামা -->
+                <div class="bg-amber-50/80 border-2 border-amber-300/80 p-5 rounded-2xl space-y-3">
+                    <div class="font-extrabold text-school-red text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-pen-fancy"></i> অঙ্গীকারনামা:
+                    </div>
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="declarationCheck" required class="mt-1 w-5 h-5 text-school-green rounded border-slate-400 focus:ring-school-green">
+                        <span class="text-xs sm:text-sm font-medium text-slate-800 leading-relaxed">
+                            আমি সজ্ঞানে ঘোষণা করছি যে, উপরে প্রদত্ত সকল তথ্য সঠিক। আমি বিদ্যালয়ের শতবর্ষ পূর্তি অনুষ্ঠানের সকল নিয়ম-কানুন ও শৃঙ্খলা মেনে চলতে বাধ্য থাকব।
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full py-4 px-6 bg-gradient-to-r from-school-green to-emerald-700 hover:from-school-greenDark hover:to-school-green active:scale-[0.99] text-white font-extrabold text-base sm:text-lg rounded-2xl shadow-xl shadow-school-green/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> রেজিস্ট্রেশন সম্পন্ন করুন ও প্রাপ্তিস্বীকার পত্র গ্রহণ করুন
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- DIGITAL RECEIPT / E-TICKET MODAL (প্রাপ্তিস্বীকার পত্র) -->
+    <div id="receiptModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="relative w-full max-w-2xl my-auto">
+            
+            <!-- Close Modal Button -->
+            <button onclick="closeReceiptModal()" class="absolute -top-12 right-0 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition no-print">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- PRINTABLE RECEIPT CONTAINER -->
+            <div id="printableReceiptArea" class="bg-white text-slate-900 rounded-3xl overflow-hidden shadow-2xl border-4 border-school-green">
+                
+                <!-- Receipt Header -->
+                <div class="bg-school-green text-white p-6 text-center border-b-4 border-school-gold relative">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[11px] font-bold bg-white/20 px-3 py-1 rounded-full uppercase">অনলাইন কপি</span>
+                        <span class="text-xs font-mono font-bold text-amber-300" id="receiptRegId">REG-2027-0000</span>
+                    </div>
+
+                    <h2 class="text-xl sm:text-2xl font-black">রাঙ্গুনীয়া মজুমদারখীল উচ্চ বিদ্যালয়</h2>
+                    <p class="text-xs text-emerald-100">শতবর্ষ পূর্তি উদযাপন-২০২৭</p>
+                    
+                    <div class="inline-block mt-3 px-4 py-1 bg-school-red text-white text-xs font-black rounded-full uppercase tracking-wider shadow">
+                        প্রাপ্তিস্বীকার পত্র (Registration Acknowledgement)
+                    </div>
+                </div>
+
+                <!-- Receipt Body -->
+                <div class="p-6 space-y-6">
+                    
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 border-b border-slate-200 pb-4">
+                        <div class="space-y-1 text-center sm:text-left flex-1">
+                            <span class="text-[11px] text-slate-500 uppercase font-bold block">প্রাক্তন শিক্ষার্থীর নাম:</span>
+                            <h3 class="text-lg font-bold text-slate-900" id="ticketNameBn">-</h3>
+                            <p class="text-xs font-semibold text-slate-600 uppercase" id="ticketNameEn">-</p>
+                        </div>
+                        <div class="w-20 h-24 bg-slate-100 border-2 border-school-green rounded-xl overflow-hidden shadow flex-shrink-0">
+                            <img id="ticketPhoto" class="w-full h-full object-cover" alt="Student Photo">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs border-b border-slate-200 pb-4">
+                        <div>
+                            <span class="text-slate-500 block">পাসের সন:</span>
+                            <span class="font-extrabold text-slate-800 text-sm" id="ticketSscYear">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">শাখা/বিভাগ:</span>
+                            <span class="font-extrabold text-slate-800 text-sm" id="ticketGroup">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">মোবাইল নম্বর:</span>
+                            <span class="font-extrabold text-slate-800 text-sm font-mono" id="ticketMobile">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">টি-শার্ট সাইজ:</span>
+                            <span class="font-extrabold text-slate-800 text-sm" id="ticketTshirt">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">অতিথির সংখ্যা:</span>
+                            <span class="font-extrabold text-slate-800 text-sm" id="ticketGuests">-</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block">পেমেন্ট মাধ্যম:</span>
+                            <span class="font-extrabold text-slate-800 text-sm uppercase" id="ticketPaymentMethod">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Summary Box -->
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-800 block">প্রদত্ত মোট ফি</span>
+                            <span class="text-xs text-slate-500 font-mono" id="ticketTxnId">TxnID: -</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-2xl font-black text-school-green" id="ticketTotalAmount">৳ ১০২০</span>
+                            <span class="text-[10px] text-emerald-700 font-bold block">✓ Verified & Received</span>
+                        </div>
+                    </div>
+
+                    <!-- Authorization & Signatures -->
+                    <div class="pt-8 flex justify-between items-end text-center text-xs text-slate-600">
+                        <div>
+                            <div class="w-28 border-b border-slate-400 mb-1"></div>
+                            <span>আবেদনকারীর স্বাক্ষর</span>
+                        </div>
+                        <div>
+                            <div class="w-36 border-b border-slate-400 mb-1"></div>
+                            <span class="font-bold text-school-green">নিবন্ধকের স্বাক্ষর</span>
+                            <span class="block text-[10px] text-slate-400">শতবর্ষ পূর্তি উদযাপন পরিষদ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="bg-slate-100 px-6 py-3 text-center border-t border-slate-200 text-[11px] text-slate-500">
+                    অনুষ্ঠানের দিন রসিদটির প্রিন্ট কপি অথবা ডিজিটাল কপি প্রদর্শন করে আইডি কার্ড ও টি-শার্ট সংগ্রহ করুন।
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4 flex gap-3 no-print">
+                <button onclick="window.print()" class="flex-1 py-3 px-4 bg-school-green hover:bg-school-greenDark text-white font-bold text-sm rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-print"></i> প্রিন্ট / PDF ডাউনলোড করুন
+                </button>
+                <button onclick="closeReceiptModal()" class="py-3 px-6 bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm rounded-xl transition">
+                    বন্ধ করুন
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Populate SSC Passing Years (1927 to 2026)
+        function initPassingYears() {
+            const select = document.getElementById('sscYear');
+            for (let year = 2026; year >= 1940; year--) {
+                const opt = document.createElement('option');
+                opt.value = year;
+                opt.textContent = `${year} (পাস)`;
+                select.appendChild(opt);
+            }
+        }
+
+        // Toggle Guest Input Field
+        function handleGuestToggle() {
+            const isSolo = document.querySelector('input[name="soloAttendance"]:checked').value === 'yes';
+            const guestBox = document.getElementById('guestCountBox');
+            if (isSolo) {
+                guestBox.classList.add('hidden');
+            } else {
+                guestBox.classList.remove('hidden');
+            }
+            updateFeeCalculations();
+        }
+
+        // Dynamic Fee Calculator Engine
+        function updateFeeCalculations() {
+            const isSolo = document.querySelector('input[name="soloAttendance"]:checked').value === 'yes';
+            const guestCount = isSolo ? 0 : parseInt(document.getElementById('guestCount').value || '1', 10);
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            let mainFee = 1000;
+            let guestFeePerPerson = 500;
+
+            // Add Cashout Charge for bKash or Nagad
+            if (paymentMethod === 'bkash' || paymentMethod === 'nagad') {
+                mainFee = 1020;
+                guestFeePerPerson = 510;
+            }
+
+            const totalGuestFee = guestCount * guestFeePerPerson;
+            const grandTotal = mainFee + totalGuestFee;
+
+            // Update Breakdown Display
+            document.getElementById('feeBreakdownMain').textContent = `${mainFee} টাকা`;
+            
+            const guestRow = document.getElementById('feeBreakdownGuestRow');
+            if (guestCount > 0) {
+                guestRow.classList.remove('hidden');
+                document.getElementById('feeGuestCountText').textContent = guestCount;
+                document.getElementById('feeBreakdownGuest').textContent = `${totalGuestFee} টাকা`;
+            } else {
+                guestRow.classList.add('hidden');
+            }
+
+            document.getElementById('calculatedTotalAmount').textContent = `৳ ${grandTotal}`;
+            document.getElementById('paidAmountInput').value = grandTotal;
+        }
+
+        // Photo Upload Preview
+        function handlePhotoPreview(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('photoPreviewImg').src = e.target.result;
+                    document.getElementById('photoPreviewImg').classList.remove('hidden');
+                    document.getElementById('photoPlaceholderIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Payment Receipt Upload Preview
+        function handleReceiptPreview(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('receiptPreviewImg').src = e.target.result;
+                    document.getElementById('receiptPreviewImg').classList.remove('hidden');
+                    document.getElementById('receiptPlaceholderIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Form Submit Handler & E-Ticket Generator
+        function handleFormSubmission(event) {
+            event.preventDefault();
+
+            // Extract Values
+            const nameBn = document.getElementById('nameBn').value.trim();
+            const nameEn = document.getElementById('nameEn').value.trim();
+            const sscYear = document.getElementById('sscYear').value;
+            const deptGroup = document.querySelector('input[name="deptGroup"]:checked').value;
+            const mobileNumber = document.getElementById('mobileNumber').value.trim();
+            const tshirtSize = document.querySelector('input[name="tshirtSize"]:checked').value;
+            const isSolo = document.querySelector('input[name="soloAttendance"]:checked').value === 'yes';
+            const guestCount = isSolo ? 'একাকী' : `${document.getElementById('guestCount').value} জন`;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const paidAmount = document.getElementById('paidAmountInput').value;
+            const transactionId = document.getElementById('transactionId').value.trim();
+            const photoSrc = document.getElementById('photoPreviewImg').src;
+
+            // Generate Registration ID
+            const regId = 'REG-2027-' + Math.floor(1000 + Math.random() * 9000);
+
+            // Populate Modal Fields
+            document.getElementById('receiptRegId').textContent = regId;
+            document.getElementById('ticketNameBn').textContent = nameBn;
+            document.getElementById('ticketNameEn').textContent = nameEn;
+            document.getElementById('ticketSscYear').textContent = sscYear;
+            document.getElementById('ticketGroup').textContent = deptGroup;
+            document.getElementById('ticketMobile').textContent = mobileNumber;
+            document.getElementById('ticketTshirt').textContent = tshirtSize;
+            document.getElementById('ticketGuests').textContent = guestCount;
+            document.getElementById('ticketPaymentMethod').textContent = paymentMethod;
+            document.getElementById('ticketTotalAmount').textContent = `৳ ${paidAmount}`;
+            document.getElementById('ticketTxnId').textContent = `TxnID: ${transactionId}`;
+            
+            if (photoSrc) {
+                document.getElementById('ticketPhoto').src = photoSrc;
+            }
+
+            // Open Receipt Modal
+            document.getElementById('receiptModal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').classList.add('hidden');
+        }
+
+        // Initialize Page Setup
+        window.onload = function() {
+            initPassingYears();
+            updateFeeCalculations();
+        };
+    </script>
+</body>
+</html>
